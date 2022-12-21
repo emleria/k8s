@@ -1,0 +1,57 @@
+#Define ingress for core-fronted service and expose it on port 80 for public network
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: core-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/issuer: "letsencrypt-prod"
+spec:
+  tls:
+    - hosts:
+        - devemleria.pl
+        - www.devemleria.pl
+        - api.devemleria.pl
+        - authme.devemleria.pl
+      secretName: core-tls-secret
+  rules:
+    - host: devemleria.pl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: core-frontend
+                port:
+                  number: 80
+    - host: www.devemleria.pl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: core-frontend
+                port:
+                  number: 80
+    - host: api.devemleria.pl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: core-frontend
+                port:
+                  number: 80
+    - host: authme.devemleria.pl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: core-frontend
+                port:
+                  number: 80

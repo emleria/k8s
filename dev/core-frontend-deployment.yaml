@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: core-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: core-frontend
+  template:
+    metadata:
+      labels:
+        app: core-frontend
+    spec:
+      containers:
+        - name: core-frontend
+          image: ghcr.io/emleria/core-frontend:dev-latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          # resources:
+          #   limits:
+          #     memory: "256Mi"
+          #     cpu: "500m"

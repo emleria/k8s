@@ -2,6 +2,8 @@
 
 ## Status
 
+No kubernetes instance exists yet.
+
 ## Documentation
 
 ## Setup
